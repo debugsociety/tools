@@ -1,18 +1,18 @@
 $(function() {
-  $('.noStyleDebug').parent().toggle();
-  $('.styleChanger').click(function() {
-    var style = 'files/' + $(this).attr('id') + '.css?' + $.now();
-    $('link[rel="stylesheet"]:first').attr({href : style});
-  });
+  $('body').prepend('<a href="#" class="styleDebug" id="template">Debug</a>');
+  $('body').prepend('<a href="#" class="noStyleDebug" id="template">Stop Debugging</a>');
+  $('.noStyleDebug').toggle();
+
   $('.styleDebug').click(function() {
     var debug = 'files/' + $(this).attr('id') + '.css?' + $.now();
-    $('link[rel="stylesheet"]').append('<link rel="stylesheet" type="text/css" href="' + debug + '">');
-    $(this).parent().toggle();
-    $('.noStyleDebug').parent().toggle();
+    $('head').append('<link rel="stylesheet" type="text/css" href="' + debug + '">');
+    $(this).toggle();
+    $('.noStyleDebug').toggle();
   });
-    $('.noStyleDebug').click(function() {
-      $(this).parent().toggle();
-      $('.styleDebug').parent().toggle();
+
+  $('.noStyleDebug').click(function() {
+    $(this).toggle();
+    $('.styleDebug').toggle();
       $('link[rel="stylesheet"]:last').remove();
     });
 });
